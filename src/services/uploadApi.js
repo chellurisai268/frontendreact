@@ -2,16 +2,28 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 // Define a service using a base URL and expected endpoints
-export const pokemonApi = createApi({
-  reducerPath: 'pokemonApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
+export const uploadApi = createApi({
+  reducerPath: 'uploadApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3300/' }),
   endpoints: (builder) => ({
-    getPokemonByName: builder.query({
-      query: (name) => `pokemon/${name}`,
+      signup: builder.mutation({
+      query: (user) =>({
+        url: "/signup",
+      method: 'POST',
+      body: user,
     }),
+      }), 
+      login: builder.mutation({
+        query: (user) =>({
+          url: "/login",
+        method: 'POST',
+        body: user,
+      }),
+        })
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetPokemonByNameQuery } = pokemonApi
+export const { useSignupMutation,useLoginMutation } = uploadApi
+

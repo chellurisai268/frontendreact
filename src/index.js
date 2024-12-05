@@ -9,10 +9,26 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Login from './features/Login';
+import Signup from './features/Signup';
+import DashBoard from './features/DashBoard';
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App></App>,
+    children:[
+      {
+        path:"/login",
+        element:<Login></Login>
+      },{
+        path:"/signup",
+        element:<Signup></Signup>
+      },
+      {
+        path:"/dashboard",
+        element:<DashBoard></DashBoard>
+      }
+    ]
   },
 ]);
 
@@ -20,7 +36,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
   <RouterProvider router={router}>
-    <App />
   </RouterProvider>
   </Provider>
 );
